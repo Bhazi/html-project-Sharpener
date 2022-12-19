@@ -1,13 +1,16 @@
-var item2 = document.querySelector("#item2");
-item2.style.backgroundColor = "green";
-var item3 = document.querySelector("#item3");
-item3.style.display = "none";
+var lister = document.getElementById("titleItems");
+var headText = document.createElement("p");
+headText.id = "headText";
+headText.textContent = "Hello";
+headText.style.fontSize = "15px";
+var ss = document.getElementsByTagName("items");
+lister.insertBefore(headText, ss.previousElementSibling);
 
-var items = document.querySelectorAll(".list-group-item");
-items[1].style.color = "green";
 
-for (let i = 0; i <= items.length; i++) {
-  if (i % 2 == 0) {
-    items[i].style.backgroundColor = "green";
-  }
-}
+var container = document.querySelector('header .container')
+var itemLister = document.getElementById('header-title');
+var text = document.createElement("p");
+text.id = "headText";
+text.textContent = "Hello";
+text.style.fontSize = "26px"
+container.insertBefore(text,itemLister)
