@@ -1,7 +1,4 @@
-var p = document.getElementsByClassName("list-group-item");
-p[2].style.backgroundColor = "green";
-
+var p = document.getElementsByTagName("li");
 for (let i = 0; i < p.length; i++) {
-    p[i].style.fontWeight = "bold"
-    
+  p[i].style.fontWeight = "bold";
 }
