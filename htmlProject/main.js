@@ -3,6 +3,16 @@ var form = document.getElementById("addForm");
 var itemList = document.getElementById("items");
 var filter = document.getElementById("filter");
 
+for (let i = 0; i < item1.length; i++) {
+  var item = document.querySelectorAll(".list-group-item")[i];
+  var button = document.createElement("button");
+  button.id = "button";
+  button.className = "btn btn-sm float-right";
+  button.appendChild(document.createTextNode("Edit"));
+  button.style.marginRight = "12px";
+  item.appendChild(button);
+}
+
 // Form submit event
 form.addEventListener("submit", addItem);
 // Delete event
@@ -73,50 +83,14 @@ function filterItems(e) {
   // Convert to an array
   Array.from(items).forEach(function (item) {
     var itemName = item.firstChild.textContent;
-    if (itemName.toLowerCase().indexOf(text) != -1) {
+    var textDesc = item.childNodes[1].textContent;
+    if (
+      itemName.toLowerCase().indexOf(text) != -1 ||
+      textDesc.toLowerCase().indexOf(text) != -1
+    ) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
     }
   });
-  
-  Array.form(items).forEach(function(ite){
-    var er = ite.childNodes[1]
-    if(er == String){
-      if(er == text){
-        item.style.display = "block";
-    } else {
-      item.style.display = "none";
-      }
-    }
-  })
 }
-// var pp = itemList.getElementsByTagName("li")[0].firstChild.textContent
-// console.log(typeof pp)
-
-for (let i = 0; i < item1.length; i++) {
-  var item = document.querySelectorAll(".list-group-item")[i];
-  var button = document.createElement("button");
-  button.id = "button";
-  button.className = "btn btn-sm float-right";
-  button.appendChild(document.createTextNode("Edit"));
-  button.style.marginRight = "12px";
-  item.appendChild(button);
-}
-
-// var fo = document.getElementById("addForm");
-// fo.addEventListener("submit", addItems);
-
-// function addItems(e) {
-//   e.preventDefault();
-
-//   var lp = document.createElement("li");
-//   lp.className = "list-group-item";
-//   lp.appendChild(document.createTextNode(va));
-//   itemList.appendChild(lp);
-// }
-// console.log(document.getElementById("item1").textContent)
-
-// console.log(document.getElementById("item4").childNodes[2]);
-
-// Array.from(document.getElementById("items").getElementsByTagName("li"))[4].childNodes[1])
