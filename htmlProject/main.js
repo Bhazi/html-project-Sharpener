@@ -25,7 +25,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function showNewUserOnScreen(s) {
   var myList = document.getElementById("myList");
-  var mypList = `<p> ${s.name} - ${s.phoneNo}</p>`;
   var paragraph = document.createElement("p");
   paragraph.id = s.phoneNo;
   paragraph.style.left = "35px";
@@ -33,12 +32,15 @@ function showNewUserOnScreen(s) {
   paragraph.textContent = `${s.name} - ${s.phoneNo}`;
   myList.appendChild(paragraph);
 
-  // var editButton = document.createElement("button");
-  // editButton.style.left = "210px";
-  // editButton.style.position = "absolute";
-  // editButton.className = "btn btn-sm btn-primary";
-  // editButton.appendChild(document.createTextNode("Edit"));
-  // paragraph.appendChild(editButton);
+  var editButton = document.createElement("button");
+  editButton.onclick = function () {
+    editUserDetails(s.name, s.phoneNo);
+  };
+  editButton.style.left = "210px";
+  editButton.style.position = "absolute";
+  editButton.className = "btn btn-sm btn-primary";
+  editButton.appendChild(document.createTextNode("Edit"));
+  paragraph.appendChild(editButton);
 
   var deleteButton = document.createElement("button");
   deleteButton.onclick = function () {
@@ -51,13 +53,22 @@ function showNewUserOnScreen(s) {
   paragraph.appendChild(deleteButton);
 }
 
+//deleting in the local storage
 function deleteUser(phone) {
   localStorage.removeItem(phone);
   removeUserFromScreen(phone);
 }
 
+//removing fromscreen
 function removeUserFromScreen(phone) {
   const parentNode = document.getElementById("myList");
   const childNodeToBeDeleted = document.getElementById(phone);
   parentNode.removeChild(childNodeToBeDeleted);
+}
+
+//edit
+function editUserDetails(name, phonenumber) {
+  document.getElementById("name").value = name;
+  document.getElementById("phoneNo").value = phonenumber;
+  deleteUser(phonenumber);
 }
