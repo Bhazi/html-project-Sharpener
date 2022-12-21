@@ -1,7 +1,6 @@
 var form = document.getElementById("addForm");
 form.addEventListener("click", adda);
 
-var co = 0;
 function adda(e) {
   if (e.target.classList.contains("submit")) {
     e.preventDefault();
@@ -12,28 +11,53 @@ function adda(e) {
       name: textItem,
       phoneNo: textPhone,
     };
-    var val = JSON.stringify(object);
-    localStorage.setItem(co++, val);
-
-    // showing values
-    var valueName = document.createElement("p");
-    valueName.id = "newName";
-    valueName.style.marginLeft = "120px";
-    valueName.textContent = textItem + " " + textPhone;
-    form.appendChild(valueName);
-
-    var edit = document.createElement("button");
-    edit.id = "edit";
-    edit.appendChild(document.createTextNode("EDIT"));
-    edit.className = "btn btn-sm edit";
-    edit.style.marginLeft = "26px";
-    valueName.appendChild(edit);
-
-    var edit = document.createElement("button");
-    edit.id = "delete";
-    edit.appendChild(document.createTextNode("Delete"));
-    edit.className = "btn btn-danger btn-sm delete";
-    edit.style.marginLeft = "26px";
-    valueName.appendChild(edit);
+    localStorage.setItem(textPhone, JSON.stringify(object));
+    showNewUserOnScreen(object);
   }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  Object.keys(localStorage).forEach((key) => {
+    var s = JSON.parse(localStorage.getItem(key));
+    showNewUserOnScreen(s);
+  });
+});
+
+function showNewUserOnScreen(s) {
+  var myList = document.getElementById("myList");
+  var mypList = `<p> ${s.name} - ${s.phoneNo}</p>`;
+  var paragraph = document.createElement("p");
+  paragraph.id = s.phoneNo;
+  paragraph.style.left = "35px";
+  paragraph.style.position = "relative";
+  paragraph.textContent = `${s.name} - ${s.phoneNo}`;
+  myList.appendChild(paragraph);
+
+  // var editButton = document.createElement("button");
+  // editButton.style.left = "210px";
+  // editButton.style.position = "absolute";
+  // editButton.className = "btn btn-sm btn-primary";
+  // editButton.appendChild(document.createTextNode("Edit"));
+  // paragraph.appendChild(editButton);
+
+  var deleteButton = document.createElement("button");
+  deleteButton.onclick = function () {
+    deleteUser(s.phoneNo);
+  };
+  deleteButton.style.left = "260px";
+  deleteButton.style.position = "absolute";
+  deleteButton.className = "btn btn-sm btn-danger";
+  deleteButton.appendChild(document.createTextNode("Delete"));
+  paragraph.appendChild(deleteButton);
+}
+
+function deleteUser(phone) {
+  localStorage.removeItem(phone);
+  removeUserFromScreen(phone);
+}
+
+function removeUserFromScreen(phone) {
+  const parentNode = document.getElementById("myList");
+  const childNodeToBeDeleted = document.getElementById(phone);
+  parentNode.removeChild(childNodeToBeDeleted);
 }
