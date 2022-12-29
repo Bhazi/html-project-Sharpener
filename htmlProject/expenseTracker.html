@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="expenseTracking">
+      <label style="margin-left: 12px">Expense Amount :</label>
+      <input style="margin-top: 25px" type="text" name="" id="expense" />
+      <label style="margin-left: 12px" for="">Description :</label>
+      <input style="margin-top: 25px" type="text" name="" id="description" />
+      <label style="margin-left: 12px" for="">Category :</label>
+      <select
+        id="categorys"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option>Movies</option>
+        <option>Fashion</option>
+        <option>Grocery</option>
+        <option>Tour</option>
+        <option>Electric Fees</option>
+      </select>
+      <input
+        style="margin-left: 12px"
+        class="submit"
+        type="submit"
+        value="Add Expense"
+      />
+    </form>
+    <ul id="myList" style="margin-top: 15px"></ul>
+    <script src="main.js"></script>
+  </body>
+</html>
