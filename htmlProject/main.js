@@ -1,17 +1,50 @@
-let posts = [
-  { title: "Post One", body: "This is post one" },
-  { title: "Post Two", body: "This is post two" },
-];
+console.log("person 1: shows ticket");
+console.log("person 2: shows ticket");
 
-function getPost() {
-  var output = " ";
-  setTimeout(() => {
-    posts.forEach((post) => {
-      output += `<li>${post.title}</li>`;
-    });
-    document.body.innerHTML = output;
-  }, 1000);
-}
+const preMovie = async () => {
+  const promiseWifeBringTicks = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("ticket"), 3000);
+  });
+
+  const getPopcorn = new Promise((resolve, reject) => resolve("popcorn"));
+
+  const addButter = new Promise((resolve, reject) => resolve("butter"));
+
+  const getColdDrink = new Promise((resolve, reject) => resolve("cola"));
+
+  let ticket = await promiseWifeBringTicks;
+
+  console.log(`wife: i have the ${ticket}`);
+  console.log("husband: we should go in");
+  console.log("wife: no i am hungry");
+
+  let popcorn = await getPopcorn;
+
+  console.log(`husband: i got some ${popcorn}`);
+  console.log("husband: we should go in");
+  console.log("wife: I need some butter on my popcorn");
+
+  let butter = await addButter;
+
+  console.log(`husband: i got some ${butter} on popcorn`);
+  console.log("husband: anything else ?");
+  console.log("wife: i want some Cooled drinks ");
+
+  let cola = await getColdDrink;
+
+  console.log("here is your " + cola);
+  console.log("wife: Thanks");
+  return ticket;
+};
+
+preMovie().then((t) => {
+  console.log(`person 3: shows ${t}`);
+});
+
+console.log("person 4: shows ticket");
+console.log("person 5: shows ticket");
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function setPost(post) {
   return new Promise((resolve, reject) => {
@@ -29,101 +62,37 @@ function setPost(post) {
   });
 }
 
-function deletePost() {
-  return new Promise((resolve, reject) => {
+var posts = [
+  { name: "lee", body: "This is lee's property" },
+  { name: "john", body: "This is john's property" },
+];
+
+async function deletePost() {
+  return await new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (posts.length != 0) {
-        resolve(posts.pop());
-      } else {
-        reject("Error : Array is Empty");
-      }
-    }, 1000);
+      resolve(posts.pop());
+      reject("Removing is failed");
+    }, 2000);
   });
 }
 
-setPost({ title: "Post Three", body: "This is post three" })
-  .then(() => {
-    getPost();
-    deletePost()
-      .then(() => {
-        getPost();
-        deletePost()
-          .then(() => {
-            getPost();
-            deletePost()
-              .then(() => {
-                getPost(),
-                  setPost({
-                    title: "Post four",
-                    body: "This is post four",
-                  }).then(() => {
-                    getPost(),
-                      deletePost()
-                        .then(() => {
-                          getPost(),
-                            deletePost()
-                              .then()
-                              .catch((err) => {
-                                console.log(err);
-                              });
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                  });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  })
-  .catch((err) => {
-    console.log(err);
-  });x
-
-
-
-// ===========promises.all===================
-var user = [{ name: "Lee", lastActivity: new Date().toString() }];
-
-function createPost(post) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      user.push(post);
-      resolve(user);
-      reject();
-    }, 1000);
-  });
-}
-
-function updateLastUserActivityTime() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      lastActivity = new Date().toString();
-      resolve(lastActivity);
-      reject("sorry");
-    }, 1000);
-  });
-}
-
-const op = createPost({
-  name: "Poll",
-  lastActivity: new Date().toString(),
+deletePost().then((err) => {
+  console.log(err);
 });
-const opo = updateLastUserActivityTime();
 
-Promise.all([op, opo])
-  .then(([posts, ActivityTime]) => {
-    console.log(posts);
-    console.log("before creating post time is " + ActivityTime);
-  })
-  .catch((err) => {
-    console.log(err);
+async function createPost(post) {
+  return await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.push(post)
+      resolve(posts);
+      reject("post adding is failed");
+    }, 2000);
   });
+}
+
+createPost({ name: "Ken", body: "This is ken's property" }).then((err) => {
+  console.log(err);
+});
+
+
+
