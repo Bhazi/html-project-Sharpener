@@ -13,11 +13,10 @@ function adda(e) {
       phoneNo: textPhone,
       mailid: mailId,
     };
-    // localStorage.setItem(mailId, JSON.stringify(object));
-    // showNewUserOnScreen(object);
+    localStorage.setItem(mailId, JSON.stringify(object));
     axios
       .post(
-        "https://crudcrud.com/api/98fee27b5244484789eb426d2e8f2c52/appoinment",
+        "https://crudcrud.com/api/55f9d8d998404739895f2f3e7ec7a0ca/appoinment",
         object
       )
       .then((res) => showNewUserOnScreen(res.data))
@@ -26,10 +25,17 @@ function adda(e) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  Object.keys(localStorage).forEach((key) => {
-    var s = JSON.parse(localStorage.getItem(key));
-    showNewUserOnScreen(s);
-  });
+  axios
+    .get("https://crudcrud.com/api/55f9d8d998404739895f2f3e7ec7a0ca/appoinment")
+    .then((res) => {
+      res.data.forEach((val) => {
+        showNewUserOnScreen(val);
+      });
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 function showNewUserOnScreen(s) {
@@ -81,4 +87,3 @@ function editUserDetails(name, phonenumber) {
   document.getElementById("phoneNo").value = phonenumber;
   deleteUser(phonenumber);
 }
-
