@@ -16,7 +16,7 @@ function adda(e) {
     localStorage.setItem(mailId, JSON.stringify(object));
     axios
       .post(
-        "https://crudcrud.com/api/55f9d8d998404739895f2f3e7ec7a0ca/appoinment",
+        "https://crudcrud.com/api/9b97d18c6c5a44bc99f31ecf46a1c5d4/appoinment",
         object
       )
       .then((res) => showNewUserOnScreen(res.data))
@@ -26,7 +26,7 @@ function adda(e) {
 
 window.addEventListener("DOMContentLoaded", () => {
   axios
-    .get("https://crudcrud.com/api/55f9d8d998404739895f2f3e7ec7a0ca/appoinment")
+    .get("https://crudcrud.com/api/9b97d18c6c5a44bc99f31ecf46a1c5d4/appoinment")
     .then((res) => {
       res.data.forEach((val) => {
         showNewUserOnScreen(val);
@@ -59,7 +59,7 @@ function showNewUserOnScreen(s) {
 
   var deleteButton = document.createElement("button");
   deleteButton.onclick = function () {
-    deleteUser(s.phoneNo);
+    deleteUser(s.phoneNo, s._id);
   };
   deleteButton.style.left = "260px";
   deleteButton.style.position = "absolute";
@@ -69,8 +69,11 @@ function showNewUserOnScreen(s) {
 }
 
 //deleting in the local storage
-function deleteUser(phone) {
+function deleteUser(phone, id) {
   localStorage.removeItem(phone);
+  axios.delete(
+    `https://crudcrud.com/api/9b97d18c6c5a44bc99f31ecf46a1c5d4/appoinment/${id}`
+  );
   removeUserFromScreen(phone);
 }
 
@@ -87,3 +90,4 @@ function editUserDetails(name, phonenumber) {
   document.getElementById("phoneNo").value = phonenumber;
   deleteUser(phonenumber);
 }
+
