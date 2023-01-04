@@ -44,14 +44,14 @@ function showNewUserOnScreen(s) {
   paragraph.id = s.phoneNo;
   paragraph.style.left = "35px";
   paragraph.style.position = "relative";
-  paragraph.textContent = `${s.name} - ${s.phoneNo}`;
+  paragraph.textContent = `${s.name} - ${s.phoneNo} - ${s.mailid}`;
   myList.appendChild(paragraph);
 
   var editButton = document.createElement("button");
   editButton.onclick = function () {
-    editUserDetails(s.name, s.phoneNo);
+    editUserDetails(s.name, s.phoneNo, s.mailid, s._id);
   };
-  editButton.style.left = "210px";
+  editButton.style.left = "390px";
   editButton.style.position = "absolute";
   editButton.className = "btn btn-sm btn-primary";
   editButton.appendChild(document.createTextNode("Edit"));
@@ -61,7 +61,7 @@ function showNewUserOnScreen(s) {
   deleteButton.onclick = function () {
     deleteUser(s.phoneNo, s._id);
   };
-  deleteButton.style.left = "260px";
+  deleteButton.style.left = "440px";
   deleteButton.style.position = "absolute";
   deleteButton.className = "btn btn-sm btn-danger";
   deleteButton.appendChild(document.createTextNode("Delete"));
@@ -85,9 +85,9 @@ function removeUserFromScreen(phone) {
 }
 
 //edit
-function editUserDetails(name, phonenumber) {
+function editUserDetails(name, phonenumber, mail, id) {
   document.getElementById("name").value = name;
   document.getElementById("phoneNo").value = phonenumber;
-  deleteUser(phonenumber);
+  document.getElementById("mailId").value = mail;
+  deleteUser(phonenumber, id);
 }
-
