@@ -61,7 +61,7 @@ function showNewUserOnScreen(s) {
   deleteButton.onclick = function () {
     deleteUser(s.phoneNo, s._id);
   };
-  deleteButton.style.left = "440px";
+  deleteButton.style.left = "441px";
   deleteButton.style.position = "absolute";
   deleteButton.className = "btn btn-sm btn-danger";
   deleteButton.appendChild(document.createTextNode("Delete"));
